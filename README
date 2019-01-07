@@ -1,0 +1,56 @@
+# Fingerprint matcher
+
+Python 3.6+ implementation of a fingerprint matching minutiae-based model.
+
+Project status: In progress
+
+## Components status:
+
+Data
+------------------------------
+Data processing:          DONE
+Minutiae extraction:      DONE
+Minutiae post-processing: DONE
+
+Matching
+------------------------------
+Minutiae tuple matching (Tree based): IN PROGRESS
+Minutiae BFMatcher score based:       DONE
+Softmax based ranking:                TO DO
+
+Infrastructure
+------------------------------
+Main class deployment: DONE
+API Development:       IN PROGRESS
+Documentation:         IN PROGRESS
+Unit-testing:          IN PROGRESS
+Requirements:          DONE
+
+
+### Prerequisites
+
+- Python 3.6+
+- Install required dependencies from requirements.txt
+
+
+## Execution
+
+- Call FingerMatcher using the preferred matcher: 'tree' (in development) or 'bf'
+- Use FingerMatcher functions for desired functionality.
+
+1) loadData(path, image_format)
+
+Loads the given image format data from a given root path. The function recursively iterates the path and loads raw images, applies histogram 	equalisation, binarisation, dot removal, enhancement for ridge smoothing and 	repair. 
+
+2) trainData()
+
+Extracts minutiae from the loaded data based on either Harris edges or the crossing numbers approach (Default). The minutiae and tuple profile of images (tree matching) or the descriptors (BFMatcher)
+
+3) matchFingerprint(image_test, verbose, match_th)
+
+Uses the extracted minutiae from each base image for drawing a comparison between them and the test image given. The matching is done based on the selected model. It can be done either via BFMatcher or via tree matching. match_th describes the threshold for the BFMatcher. Not considered for tree matching at the moment. The function returns the scores list and some information about a match or not based on the given threshold. If no threshold is given, it outputs a boolean prediction.
+
+
+## Authors
+
+- Dragos Tudor (dragostudoriliuta@gmail.com)
